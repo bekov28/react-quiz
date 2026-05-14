@@ -11,6 +11,8 @@ import FinishedScreen from "./FinishedScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
 
+const SEC_PER_QUES = 30;
+
 const initialState = {
   questions: [],
 
@@ -20,21 +22,17 @@ const initialState = {
   answer: null,
   points: 0,
   highscore: 0,
-  timeRemaining: 10,
+  timeRemaining: null,
 };
 
 function reducer(state, action) {
-  console.log("payload>>>>>>>>", action);
-  // console.log("actionType>>>>>>>>", action.type);
-  // console.log("state", state);
-
   switch (action.type) {
     case "dataReceived":
       return { ...state, questions: action.payload, status: "ready" };
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
-      return { ...state, status: "active" };
+      return { ...state, status: "active", timeRemaining: state.questions.length * SEC_PER_QUES };
     case "newAnswer":
       const question = state.questions.at(state.index);
       return {
