@@ -1,11 +1,11 @@
 :root {
-  --color-darkest: #343a40;
-  --color-dark: #495057;
+  --color-darkest: #103662;
+  --color-dark: #406080;
   --color-medium: #ced4da;
   --color-light: #f1f3f5;
 
   --color-theme: #1098ad;
-  --color-accent: #ffa94d;
+  --color-accent: rgb(231, 113, 113);
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Codystar&display=swap");
@@ -45,7 +45,8 @@ body {
   margin-bottom: 4rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .error {
@@ -62,12 +63,12 @@ img {
 }
 
 h1 {
-  font-family: "Codystar";
+  /* font-family: "Codystar"; */
   font-size: 5.6rem;
 }
 
 h2 {
-  font-size: 3.6rem;
+  font-size: 2.6rem;
   margin-bottom: 2rem;
 }
 
@@ -81,12 +82,14 @@ h4 {
   font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: 2.4rem;
+  text-align: center;
 }
 
 .start {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .progress {
@@ -164,7 +167,7 @@ progress {
 .btn-option.wrong {
   background-color: var(--color-accent);
   border: 2px solid var(--color-accent);
-  color: var(--color-darkest);
+  color: white;
 }
 
 .answer {

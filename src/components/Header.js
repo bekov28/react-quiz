@@ -1,8 +1,8 @@
 function Header() {
   return (
     <header className="app-header">
+      <h1>BrainSync</h1>
       <img src="logo512.png" alt="React logo" />
-      <h1>The React Quiz</h1>
     </header>
   );
 }

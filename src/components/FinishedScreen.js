@@ -1,4 +1,5 @@
 import React from "react";
+import HoverButton from "./HoverButton";
 
 export default function FinishedScreen({ points, maxPoints, highscore, dispatch }) {
   const percentage = (points / maxPoints) * 100;
@@ -17,9 +18,14 @@ export default function FinishedScreen({ points, maxPoints, highscore, dispatch 
         ! ({Math.ceil(percentage)}%)
       </p>
       <p className="highscore">Highscore: {highscore} points</p>
-      <button className="btn btn-ui" onClick={() => dispatch({ type: "retake" })}>
+      <HoverButton
+        classHandle="btn-ui"
+        soundSrc="/sounds/hover.mp3"
+        clickSoundSrc="/sounds/click.mp3"
+        onClick={() => dispatch({ type: "retake" })}
+      >
         Retake the test!
-      </button>
+      </HoverButton>
     </>
   );
 }
