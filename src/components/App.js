@@ -28,7 +28,12 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "dataReceived":
-      return { ...state, questions: action.payload, status: "ready" };
+      return {
+        ...state,
+        questions: action.payload.questions,
+        status: "ready",
+        highscore: action.payload.highscore,
+      };
     case "dataFailed":
       return { ...state, status: "error" };
     case "start":
@@ -74,14 +79,19 @@ export function App() {
   const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
   useEffect(() => {
-    fetch("http://localhost:8000/questions")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
+    Promise.all([
+      fetch("http://localhost:8000/questions"),
+      fetch("http://localhost:8000/highscore"),
+    ])
+      .then(([resQ, resH]) => {
+        if (!resQ.ok || !resH.ok) {
+          throw new Error(`HTTP error! Status: ${resQ.status}, ${resH.status}`);
         }
-        return res.json();
+        return Promise.all([resQ.json(), resH.json()]);
       })
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
+      .then(([dataQ, dataH]) =>
+        dispatch({ type: "dataReceived", payload: { questions: dataQ, highscore: dataH.value } })
+      )
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);
 

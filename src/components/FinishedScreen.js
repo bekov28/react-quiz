@@ -1,7 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HoverButton from "./HoverButton";
 
 export default function FinishedScreen({ points, maxPoints, highscore, dispatch }) {
+  useEffect(() => {
+    if (points > highscore) {
+      fetch("http://localhost:8000/highscore/1", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          value: points,
+        }),
+      });
+    }
+  }, [highscore, points]);
+
   const percentage = (points / maxPoints) * 100;
 
   let emoji;
@@ -26,6 +40,14 @@ export default function FinishedScreen({ points, maxPoints, highscore, dispatch 
       >
         Retake the test!
       </HoverButton>
+      <div className="container">
+        <h3>Emoji per achivement!</h3>
+        <p> 🏅 - If you collect between 90% ~ 100%</p>
+        <p> 😎 - If you collect between 80% ~ 90%</p>
+        <p> ☺️ - If you collect between 70% ~ 80%</p>
+        <p> 😏 - If you collect between 50% ~ 70%</p>
+        <p> 😔 - If you collect less than 50%</p>
+      </div>
     </>
   );
 }

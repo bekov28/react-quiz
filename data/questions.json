@@ -135,5 +135,6 @@
       "correctOption": 3,
       "points": 20
     }
-  ]
+  ],
+  "highscore": { "id": "1", "value": 0 }
 }
