@@ -9,7 +9,18 @@ export default function HoverButton({
   disabled,
 }) {
   const hoverSound = useMemo(() => new Audio(soundSrc), [soundSrc]);
-  const clickSound = useMemo(() => new Audio(clickSoundSrc), [clickSoundSrc]);
+
+  const clickSound = useMemo(() => {
+    const audio = new Audio(clickSoundSrc);
+
+    if (clickSoundSrc.includes("select.mp3")) {
+      audio.volume = 0.3;
+    } else {
+      audio.volume = 1.0;
+    }
+
+    return audio;
+  }, [clickSoundSrc]);
 
   //Cleanup
   useEffect(() => {
