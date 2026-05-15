@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# BrainSync Quiz App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based quiz application that tests knowledge with real-time feedback and highscore tracking.
 
-## Available Scripts
+## Features
+*   **Dynamic Questions:** Fetches data from a REST API.
+*   **Highscore Persistence:** Saves the highest score across sessions using `PATCH` requests.
+*   **Timer:** Adds pressure with a countdown for each quiz session.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Tech Stack
+*   **Frontend:** React (Hooks, Reducer)
+*   **Backend:** `json-server` (hosted on Render)
+*   **Deployment:** Netlify (Frontend) and Render (API)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Project Structure
+*   `src/components/`: Modular React components.
+*   `src/components/App.js`: State management using `useReducer`.
+*   `data/questions.json`: The source data for questions and scores.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Challenges
 
-### `npm run build`
+### Shuffling Options
+**The Problem:**
+The questions in the JSON file always listed options in the same order. This made the quiz predictable, as the correct answer was always at the same index. I needed to randomize the options every time a question appeared without losing track of which answer was correct.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**The Solution:**
+I implemented a shuffle function before the question is displayed to the user:
+1.  When a question loads, the app extracts the `options` array.
+2.  The array is shuffled using a randomization algorithm so the visual order is different every time.
+3.  Instead of checking the answer based on a fixed index (like "always index 0"), the logic compares the user's selected text with the original data's correct value.
+4.  This ensures the quiz feels fresh for every play while maintaining accurate scoring.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to Run Locally
 
-### `npm run eject`
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repository-url>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Install dependencies:**
+   npm install
+3. **Start the JSON server:**
+   npm run server
