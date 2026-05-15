@@ -90,7 +90,7 @@ export function App() {
         return Promise.all([resQ.json(), resH.json()]);
       })
       .then(([dataQ, dataH]) =>
-        dispatch({ type: "dataReceived", payload: { questions: dataQ, highscore: dataH.value } })
+        dispatch({ type: "dataReceived", payload: { questions: dataQ, highscore: dataH[0].value } })
       )
       .catch((err) => dispatch({ type: "dataFailed" }));
   }, []);

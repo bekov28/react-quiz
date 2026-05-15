@@ -3,7 +3,8 @@ import HoverButton from "./HoverButton";
 
 export default function FinishedScreen({ points, maxPoints, highscore, dispatch }) {
   useEffect(() => {
-    if (points > highscore) {
+    if (points > 0 && points >= highscore) {
+      console.log("Updating highscore on server...");
       fetch("http://localhost:8000/highscore/1", {
         method: "PATCH",
         headers: {
@@ -12,9 +13,14 @@ export default function FinishedScreen({ points, maxPoints, highscore, dispatch 
         body: JSON.stringify({
           value: points,
         }),
-      });
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to update highscore");
+          console.log("Highscore saved successfully!");
+        })
+        .catch((err) => console.error(err.message));
     }
-  }, [highscore, points]);
+  }, [points, highscore]);
 
   const percentage = (points / maxPoints) * 100;
 
