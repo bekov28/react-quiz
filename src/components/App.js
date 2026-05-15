@@ -57,7 +57,12 @@ function reducer(state, action) {
     case "retake":
       return {
         ...initialState,
-        questions: state.questions,
+        questions: state.questions.map((question) => {
+          const correctOption = question.options[question.correctOption];
+          const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
+          const newCorrectOption = shuffledOptions.indexOf(correctOption);
+          return { ...question, options: [...shuffledOptions], correctOption: newCorrectOption };
+        }),
         status: "ready",
       };
     case "tick":
