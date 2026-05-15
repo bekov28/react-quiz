@@ -12,6 +12,7 @@ import Footer from "./Footer";
 import Timer from "./Timer";
 
 const SEC_PER_QUES = 30;
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
 
 const initialState = {
   questions: [],
@@ -84,10 +85,7 @@ export function App() {
   const maxPoints = questions.reduce((prev, cur) => prev + cur.points, 0);
 
   useEffect(() => {
-    Promise.all([
-      fetch("http://localhost:8000/questions"),
-      fetch("http://localhost:8000/highscore"),
-    ])
+    Promise.all([fetch(`${BASE_URL}/questions`), fetch(`${BASE_URL}/highscore`)])
       .then(([resQ, resH]) => {
         if (!resQ.ok || !resH.ok) {
           throw new Error(`HTTP error! Status: ${resQ.status}, ${resH.status}`);

@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import HoverButton from "./HoverButton";
 
 export default function FinishedScreen({ points, maxPoints, highscore, dispatch }) {
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+
   useEffect(() => {
     if (points > 0 && points >= highscore) {
       console.log("Updating highscore on server...");
-      fetch("http://localhost:8000/highscore/1", {
+      fetch(`${BASE_URL}/highscore/1`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
