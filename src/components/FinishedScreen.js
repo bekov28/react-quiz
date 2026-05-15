@@ -22,7 +22,7 @@ export default function FinishedScreen({ points, maxPoints, highscore, dispatch 
         })
         .catch((err) => console.error(err.message));
     }
-  }, [points, highscore]);
+  }, [points, highscore, BASE_URL]);
 
   const percentage = (points / maxPoints) * 100;
 
