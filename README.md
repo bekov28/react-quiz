@@ -23,6 +23,8 @@ A React-based quiz application that tests knowledge with real-time feedback and 
 
 ---
 
+<img width="1374" height="1306" alt="image" src="https://github.com/user-attachments/assets/79514f0d-57cf-4c85-8490-f40e7b5ba3da" />
+
 ## Challenges
 
 ### Shuffling Options
