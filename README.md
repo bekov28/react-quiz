@@ -8,6 +8,7 @@ Note that json-server is hosted on Render's free tier, so fetching data might ta
 *   **Dynamic Questions:** Fetches data from a REST API.
 *   **Highscore Persistence:** Saves the highest score across sessions using `PATCH` requests.
 *   **Timer:** Adds pressure with a countdown for each quiz session.
+*   **Audio:** Audio effects when clicked on buttons and selected options
 
 ---
 
