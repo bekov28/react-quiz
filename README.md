@@ -1,6 +1,8 @@
 # BrainSync Quiz App
 
-A React-based quiz application that tests knowledge with real-time feedback and highscore tracking.
+A React-based quiz application that tests knowledge with real-time feedback and highscore tracking. 
+
+Note that json-server is hosted on Render's free tier, so fetching data might take up to 15-20 seconds
 
 ## Features
 *   **Dynamic Questions:** Fetches data from a REST API.
